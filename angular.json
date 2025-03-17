@@ -34,7 +34,8 @@
               "projects/hotelinventory/src/assets"
             ],
             "styles": [
-              "projects/hotelinventory/src/styles.scss"
+              "projects/hotelinventory/src/styles.scss",
+              "D:/Project/hotelinventoryapp/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
