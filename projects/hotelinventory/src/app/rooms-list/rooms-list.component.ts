@@ -37,7 +37,7 @@ export class RoomsListComponent implements OnInit, OnChanges {
   }
 
   selectRoom(room: RoomList){
-    this.selectedRoom.emit(room);   //Emits selectd room which button is clicked
+    this.selectedRoom.emit(room);   //Emits selected room which button is clicked
 
   }
 

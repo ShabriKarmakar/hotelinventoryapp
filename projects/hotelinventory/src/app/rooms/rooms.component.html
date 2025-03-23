@@ -1,4 +1,9 @@
-<h1>Welcome to {{ hotelName }}</h1>
+<!--<h1>Welcome to {{ hotelName }}</h1>-->
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+
 <div [hidden]="hideRooms">
   Number of rooms:
   <div [ngStyle]="{'color': rooms.availableRooms? 'steelblue' :'red'}"
@@ -7,7 +12,7 @@
 </div>
 
 
-<!--Optional chaining-->
+<!--Optional chaining kinf of like teranary operation but if original parameter is null use the "no rooms"-->
 {{ rooms?.availableRooms ?? 'No rooms' }}
 
 <div *ngIf="selectedRoom">

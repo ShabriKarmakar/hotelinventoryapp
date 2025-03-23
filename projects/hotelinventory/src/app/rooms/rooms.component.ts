@@ -1,12 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  DoCheck,
+  ViewChild,
+  AfterViewInit,
+  AfterViewChecked,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
 import {Room, RoomList} from "./rooms";
+import {HeaderComponent} from "../header/header.component";
 
 @Component({
   selector: 'hinv-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
 
   hotelName: string = "Hilton Hotel"
   numberOfRooms: number = 5;
@@ -20,15 +30,20 @@ export class RoomsComponent implements OnInit {
     availableRooms: 10,
     bookedRooms: 5,
   }
-title = "Room List Start"
+  title = "Room List Start"
 
   roomList: RoomList[] = []
+
+  @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
+
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   constructor() {
   }
 
   ngOnInit(): void {
 
+    console.log(this.headerComponent);
     this.roomList = [{
       roomNumber: 1,
       roomType: 'Deluxe Room',
@@ -62,6 +77,22 @@ title = "Room List Start"
       }]
   }
 
+  //ngDoCheck executes anytime you raise ANY event, hence very expensive (can be used to detect changes)
+
+
+  ngDoCheck() {
+    console.log("Do Check --- on changes called");
+  }
+
+  ngAfterViewInit() {
+    console.log(this.headerChildrenComponent)
+    console.log(this.headerComponent.title = "Rooms View");
+    console.log(this.headerChildrenComponent.last.title = "Last Title");
+  }
+
+  ngAfterViewChecked(): void {
+  }
+
   toggle() {
     this.hideRooms = !this.hideRooms;
     this.title = "Room List Toggled";
@@ -77,7 +108,7 @@ title = "Room List Start"
       roomType: 'Deluxe Room',
       amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
       price: 500,
-      photos:"",
+      photos: "",
       checkInTime: new Date('11-Nov-2021'),
       checkOutTime: new Date('12-Nov-2021'),
       rating: 4.5,
@@ -85,4 +116,6 @@ title = "Room List Start"
     // this.roomList.push(room); //The property should be immutatable (this.roomloist.push() won't work since it MODIFIED the roomList property)
     this.roomList = [...this.roomList, room]; //this creates a new instance (spread operaor to take the previous data and "room" is added in the array)
   }
+
+
 }
